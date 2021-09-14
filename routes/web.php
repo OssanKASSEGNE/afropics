@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SessionUserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,17 +15,31 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//GUEST
-Route::middleware(['guest'])->group(
-    function () {
+//Guest
+Route::view('/', 'home')->name('home'); // Landing page
 
-   
+Route::get('/login', [SessionUserController::class, 'index'])
+    ->name('goLogin');
 
-    }
-);
+Route::post('/login', [SessionUserController::class, 'login'])
+    ->middleware('guest')
+    ->name('login');
+
+Route::get('/register', [SessionUserController::class, 'create'])
+    ->name('goRegister');
+
+Route::post('/register', [SessionUserController::class, 'store'])
+    ->middleware('guest')
+    ->name('register');
 
 
-//Bo => admin
+//Auth User  => front-end
+Route::view('/dashboard', 'dashboard')->middleware('auth') //Dashboard
+            ->name('dashboard');
+Route::post('/logout', [SessionUserController::class, 'destroy'])
+    ->name('logout');
+
+//Auth Admin => back-end
 Route::get('/bo/users', [UserController::class,'index'])
                                 ->name('bo.users.index');
 Route::get('/bo/users/create', [UserController::class,'create'])

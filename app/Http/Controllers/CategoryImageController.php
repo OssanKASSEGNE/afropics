@@ -30,7 +30,7 @@ class CategoryImageController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,7 +41,7 @@ class CategoryImageController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\CategoryImage  $categoryImage
+     * @param  \App\Models\CategoryImage $categoryImage
      * @return \Illuminate\Http\Response
      */
     public function show(CategoryImage $categoryImage)
@@ -52,7 +52,7 @@ class CategoryImageController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\CategoryImage  $categoryImage
+     * @param  \App\Models\CategoryImage $categoryImage
      * @return \Illuminate\Http\Response
      */
     public function edit(CategoryImage $categoryImage)
@@ -64,7 +64,7 @@ class CategoryImageController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\CategoryImage  $categoryImage
+     * @param  \App\Models\CategoryImage $categoryImage
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, CategoryImage $categoryImage)
@@ -75,7 +75,7 @@ class CategoryImageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\CategoryImage  $categoryImage
+     * @param  \App\Models\CategoryImage $categoryImage
      * @return \Illuminate\Http\Response
      */
     public function destroy(CategoryImage $categoryImage)

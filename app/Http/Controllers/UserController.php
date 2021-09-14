@@ -17,9 +17,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('bo.users.index',[
+        return view(
+            'bo.users.index', [
             'users' => User::all()
-        ]);
+            ]
+        );
     }
 
     /**
@@ -35,69 +37,77 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $validated = $request->validate(
+            [
             'firstname' => ['required', 'max:255'],
             'lastname' => ['required', 'max:255'],
             'email' => ['required','email','unique:users,email'],
             'password' => ['required',]
-        ]);
+            ]
+        );
 
-        $validated['password'] = Hash::make($validated['password'] );
+        $validated['password'] = Hash::make($validated['password']);
 
         User::create($validated);
      
-        return back()->with('success','User created')
-                     ->withInput();
+        return back()->with('success', 'User created')
+            ->withInput();
 
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
     public function show(User $user)
     {
-        return view('bo.users.show',[
+        return view(
+            'bo.users.show', [
             'user' => $user
-        ]);
+            ]
+        );
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
     {
-        return view('bo.users.edit',[
+        return view(
+            'bo.users.edit', [
             'user' => $user
-        ]);
+            ]
+        );
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Models\User         $user
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
     {
         $emailDecision = ($request->validate(['email']) === $user->email) ? ['required','email','unique:users,email'] : ['required','email'] ;
-        $validated = $request->validate([
+        $validated = $request->validate(
+            [
             'firstname' => ['required', 'max:255'],
             'lastname' => ['required', 'max:255'],
             'email' => $emailDecision,
-           'password' => ['min:3']
-        ]);
+            'password' => ['min:3']
+            ]
+        );
         
 
         // if (isNull($validated['password']) )
@@ -108,13 +118,13 @@ class UserController extends Controller
             
         // }
         $user->update($request->all());
-        return redirect(route('bo.users.show',['user' => $user]))->with('success','User updated');
+        return redirect(route('bo.users.show', ['user' => $user]))->with('success', 'User updated');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user)
