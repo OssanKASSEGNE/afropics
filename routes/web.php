@@ -16,26 +16,38 @@ use Illuminate\Support\Facades\Route;
 */
 
 //Guest
-Route::view('/', 'home')->name('home'); // Landing page
-
-Route::get('/login', [SessionUserController::class, 'index'])
-    ->name('goLogin');
-
-Route::post('/login', [SessionUserController::class, 'login'])
-    ->middleware('guest')
-    ->name('login');
-
-Route::get('/register', [SessionUserController::class, 'create'])
-    ->name('goRegister');
-
-Route::post('/register', [SessionUserController::class, 'store'])
-    ->middleware('guest')
-    ->name('register');
-
 
 //Auth User  => front-end
-Route::view('/dashboard', 'dashboard')->middleware('auth') //Dashboard
+Route::middleware(['guest'])->group(
+    function () {
+
+        Route::view('/', 'home')->name('home'); // Landing page
+
+        Route::get('/login', [SessionUserController::class, 'index'])
+            ->name('goLogin');
+
+        Route::post('/login', [SessionUserController::class, 'login'])
+            ->name('login');
+
+        Route::get('/register', [SessionUserController::class, 'create'])
+            ->name('goRegister');
+
+        Route::post('/register', [SessionUserController::class, 'store'])
+        
+            ->name('register');
+});
+
+//Auth User  => front-end
+Route::middleware(['auth'])->group(
+    function () {
+
+        Route::view('/dashboard', 'dashboard')->middleware('auth') //Dashboard
             ->name('dashboard');
+
+        Route::post('/logout', [SessionUserController::class, 'destroy'])
+            ->name('logout');
+});
+
 Route::post('/logout', [SessionUserController::class, 'destroy'])
     ->name('logout');
 

@@ -7,14 +7,26 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <nav>
+        <ul>
+            <input type="search" name="search" id="">
+            <li>Home</li>
+            <li>Our bundle</li>
+            <li>My creations</li>
+            <li>My catalogue</li>
+            <li>About us</li>
+            <li>My account (logo user)</li>
+            <p>Dropdown with user settings, transactions history,</p> => settings RU user info
+            <p>Remaining credits : {{Auth::user()->subscription->remaining_credit}}</p>
+        </ul>
+    </nav>
     @if(session()->has('success'))
         
         {{session()->get('success')}}
         
     @endif
     
-    <span>Welcome {{Auth::user()->firstname}} You have  <b>Time left</b> left before the end of you subscription.</span>
+    <span>Welcome {{Auth::user()->firstname}} Your subscription ends in <b>{{Carbon\Carbon::now()->diffForHumans(Auth::user()->subscription->subscription_date_end)}}</b> </span>
 
     <form action="{{route('logout')}}" method="POST">
         @csrf
@@ -22,7 +34,7 @@
     </form>
     
 
-    <h2>Add a photo</h2> 
+    <h2>Sbmit a photo</h2> 
         <p>Form to add a photo must be in another menu</p>
     <h2>My creations</h2>
          <p>Add search, with filters must be in another menu</p>
