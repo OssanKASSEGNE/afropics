@@ -15,10 +15,26 @@
     
     <form action="{{route('register')}}" method="Post">
         @csrf
-        Email <br> <br>
-        <input type="email" name="email" id="" value="{{old('email')}}">
-        <input type="password" name="password" id="">
-        <input type="checkbox" name="rememberMe" id="" value="{{old('rememberMe')}}">
+        Email
+        <br> <br>
+        <input type="email" name="email" id="" value="{{old('email')}}" required autofocus>
+        <br> <br>
+        firstname 
+        <br> <br>
+        <input type="text" name="firstname" id="" value="{{old('firstname')}}" required autofocus>
+        <br> <br>
+        lastname 
+        <br> <br>
+        <input type="text" name="lasstname" id="" value="{{old('lastname')}}" required autofocus>
+        <br> <br>
+        Password
+         <br> <br>
+        <input type="password" name="password" id="" required autofocus>
+        <br> <br>
+       Confirm password
+       <br> <br>
+       <input type="password" name="confirm_password" id="" required autofocus>
+        <br> <br>
         <input type="submit" value="register">
     </form>
 </body>

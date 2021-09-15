@@ -23,14 +23,14 @@ class ImageFactory extends Factory
     public function definition()
     {
         $status = ['published', 'analyzing'];
-       
+        $filepath = $this->faker->image(storage_path("app/public/imagesFull", 1280, 650));
         return [
             "artiste_id" => User::all()->random(),
-            "image_name" => $this->faker->name(),
-            "image_path_full" => $this->faker->image(storage_path("app/public/imagesFull",1280,650)),
-            "image_path_snippet" => $this->faker->image(resource_path("assets/imagesSnippet",720,400)),
-            "image_status" => $status[random_int(0,1)],
-            "image_price" => random_int(1,15),
+            "image_name" => basename($filepath),
+            "image_path_full" => $filepath,
+            "image_path_snippet" => $this->faker->image(resource_path("assets/imagesSnippet", 720, 400)),
+            "image_status" => $status[random_int(0, 1)],
+            "image_price" => random_int(1, 15),
             "image_description" => $this->faker->sentence(),
         ];
     }

@@ -37,7 +37,7 @@ class SessionUserController extends Controller
         if (Auth::attempt($credentials, $request->boolean('rememberMe'))) {
             $request->session()->regenerate();
             return redirect()->intended(RouteServiceProvider::HOME)
-                ->with('sucess', "Welcome {{ Auth::user()->firstname }}");
+                ->with('success', 'You are now log in as '. Auth::user()->email . '...');
         }
         return back()->withInput();
     }

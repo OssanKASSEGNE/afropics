@@ -13,5 +13,7 @@
     @endif
     <a href="{{route('goLogin')}}">Log in</a>
     <a href="{{route('goRegister')}}">Register</a>
+
+  
 </body>
 </html>

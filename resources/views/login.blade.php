@@ -15,10 +15,16 @@
     
     <form action="{{route('login')}}" method="Post">
         @csrf
-        Email <br> <br>
-        <input type="email" name="email" id="" value="{{old('email')}}">
-        <input type="password" name="password" id="">
-        <input type="checkbox" name="rememberMe" id="" value="{{old('rememberMe')}}">
+        Email 
+        <br> <br>
+        <input type="email" name="email" id="" value="{{old('email')}}" required autofocus>
+        <br> <br>
+        Password 
+        <br> <br>
+        <input type="password" name="password" id="" required autofocus>
+        <br> <br>
+        <input type="checkbox" name="rememberMe" id="" value="{{old('rememberMe')}}"> Remember me 
+        <br> <br>
         <input type="submit" value="login">
     </form>
 </body>
