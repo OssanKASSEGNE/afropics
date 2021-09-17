@@ -17,7 +17,7 @@
             <li>About us</li>
             <li>My account (logo user)</li>
             <p>Dropdown with user settings, transactions history,</p> => settings RU user info
-            <p>Remaining credits : {{Auth::user()->subscription->remaining_credit}}</p>
+            <p>Remaining credits : {{$user->subscription->remaining_credit}}</p>
         </ul>
     </nav>
     @if(session()->has('success'))
@@ -26,7 +26,7 @@
         
     @endif
     
-    <span>Welcome {{Auth::user()->firstname}} Your subscription ends in <b>{{Carbon\Carbon::now()->diffForHumans(Auth::user()->subscription->subscription_date_end)}}</b> </span>
+    <span>Welcome {{$user->firstname}} Your subscription ends in <b>{{Carbon\Carbon::now()->diffForHumans($user->subscription->subscription_date_end)}}</b> </span>
 
     <form action="{{route('logout')}}" method="POST">
         @csrf
@@ -38,8 +38,8 @@
         <p>Form to add a photo must be in another menu</p>
     <h2>My creations</h2>
          <p>Add search, with filters must be in another menu</p>
-         <p>You have uploaded {{Auth::user()->creations->count()}} photos</p>
-        @foreach(Auth::user()->creations as $image)
+         <p>You have uploaded {{$user->creations->count()}} photos</p>
+        @foreach($user->creations as $image)
             @if($image->image_status == "published")
                 <h3>{{$image->image_name}}</h3>
                 <img src="{{asset('storage/imagesFull/'.$image->image_name)}}" alt="{{$image->image_name}}">
@@ -50,8 +50,8 @@
 
     <h2>My catalogue</h2>
         <p>Add search, with filters must be in another menu</p>
-        <p>You have bought {{Auth::user()->imagesOwned->count()}} photos</p>
-        @foreach(Auth::user()->imagesOwned as $image)
+        <p>You have bought {{$user->imagesOwned->count()}} photos</p>
+        @foreach($user->imagesOwned as $image)
             <h3>{{$image->image_name}}</h3>
             <img src="{{asset('storage/imagesFull/'.$image->image_name)}}" alt="{{$image->image_name}}">
         @endforeach

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SessionUserController;
+use App\Http\Controllers\InfoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,7 +42,7 @@ Route::middleware(['guest'])->group(
 Route::middleware(['auth'])->group(
     function () {
 
-        Route::view('/dashboard', 'dashboard')->middleware('auth') //Dashboard
+        Route::get('/dashboard', [InfoController::class, 'create']) //Dashboard
             ->name('dashboard');
 
         Route::post('/logout', [SessionUserController::class, 'destroy'])
